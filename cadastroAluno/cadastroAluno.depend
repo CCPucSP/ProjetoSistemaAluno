@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1537811826 source:c:\users\cpudv\desktop\scriptsc\cadastroaluno\main.c
+	<stdio.h>
+	<stdlib.h>
+	"tipos.h"
+	"decl.h"
+
+1537808383 c:\users\cpudv\desktop\scriptsc\cadastroaluno\tipos.h
+	"const.h"
+
+1537808327 c:\users\cpudv\desktop\scriptsc\cadastroaluno\const.h
+
+1537811785 c:\users\cpudv\desktop\scriptsc\cadastroaluno\decl.h
+
+1537812069 source:c:\users\cpudv\desktop\scriptsc\cadastroaluno\func.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"tipos.h"
+	"decl.h"
+
