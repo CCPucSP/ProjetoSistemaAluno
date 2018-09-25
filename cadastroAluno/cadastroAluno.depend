@@ -19,3 +19,23 @@
 	"tipos.h"
 	"decl.h"
 
+1537888739 source:c:\users\vosouza\desktop\cadastroaluno\func.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"tipos.h"
+	"decl.h"
+
+1537813958 c:\users\vosouza\desktop\cadastroaluno\tipos.h
+	"const.h"
+
+1537813958 c:\users\vosouza\desktop\cadastroaluno\const.h
+
+1537888324 c:\users\vosouza\desktop\cadastroaluno\decl.h
+
+1537888623 source:c:\users\vosouza\desktop\cadastroaluno\main.c
+	<stdio.h>
+	<stdlib.h>
+	"tipos.h"
+	"decl.h"
+

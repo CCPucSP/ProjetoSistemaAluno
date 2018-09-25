@@ -16,15 +16,18 @@ void inicializarVet(aluno *vetAlunos[]){
 
 int posicaoLivre(aluno *vetaluno[]){
     int i=0;
-    while((vetaluno[i] != NULL) || (i>=MAX_ALUNOS)){
+    while((vetaluno[i] != NULL) && (i<=MAX_ALUNOS-1) && (i != -1)){
         i++;
+        if(vetaluno[i] != NULL && (i>=MAX_ALUNOS-1)){
+            i = -1;
+        }
     }
+
     return i;
 }
 
-void cadastro(aluno *vetaluno[]){
+void cadastro(aluno *vetaluno[],int pos){
 
-    int pos = posicaoLivre(vetaluno);
     aluno *pa = (aluno *)malloc (1*sizeof(aluno));
 
     fflush(stdin);
@@ -94,4 +97,27 @@ void imprimirTodos(aluno *vetAlunos[]){
             imprimirDados(*vetAlunos[i]);
         }
     }
+}
+
+int buscarRA(aluno *vetaluno[]){
+    int i=0;
+    char *ra = (char *)malloc(10*sizeof(char));
+
+    printf("\nDigite o RA do aluno a ser removido:");
+    fflush(stdin);
+    fgets(ra,10,stdin);
+
+    while( (strcmp(vetaluno[i]->ra,ra) != 0) && (i<=MAX_ALUNOS-1) && (i != -1) ){
+        i++;
+        if((strcmp(vetaluno[i]->ra,ra) != 0) && (i>=MAX_ALUNOS-1)){
+            i = -1;
+        }
+    }
+    return i;
+}
+
+void removerAluno(aluno *vetaluno[],int ra){
+    free(vetaluno[ra]);
+    vetaluno[ra] = NULL;
+    printf("\nRemovido com Sucesso!");
 }

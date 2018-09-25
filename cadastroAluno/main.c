@@ -7,7 +7,8 @@ int main()
     aluno *vetalunos[MAX_ALUNOS];
     inicializarVet(vetalunos);
 
-    int sair =0, menu=0;
+    int sair =0, menu=0, pos = 0, ra = 0;
+
     while(sair == 0){
         printf("================= Sistema ===============");
         printf("\n\t1- Cadastrar");
@@ -21,7 +22,13 @@ int main()
             case 1:
                 system("cls");
                 printf("Cadastro de Aluno");
-                cadastro(vetalunos);
+                pos = posicaoLivre(vetalunos);
+                if(pos != -1){
+                    cadastro(vetalunos,pos);
+                }else{
+                    printf("\n==========Memoria cheia==========\n");
+                }
+
             break;
             case 2:
                 system("cls");
@@ -29,7 +36,14 @@ int main()
                 imprimirTodos(vetalunos);
             break;
             case 3:
-                sair=1;
+                system("cls");
+                printf("Remover de Aluno");
+                ra = buscarRA(vetalunos);
+                if(ra != -1){
+                    removerAluno(vetalunos,ra);
+                }else{
+                    printf("\n==========RA Nao encontrado ==========\n");
+                }
             break;
             default:
                 printf("\t Voce digitou um opcao invalida!");
