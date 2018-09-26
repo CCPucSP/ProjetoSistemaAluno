@@ -29,10 +29,13 @@ int posicaoLivre(aluno *vetaluno[]){
 void cadastro(aluno *vetaluno[],int pos){
 
     aluno *pa = (aluno *)malloc (1*sizeof(aluno));
-
+    char *str = (char *)malloc(100*sizeof(char));
     fflush(stdin);
+
     printf("\nNome: ");
-    fgets(pa->dadosPessoa.nome,20,stdin);
+    fgets(str,20,stdin);
+    limparNewLine(str);
+    strcpy(pa->dadosPessoa.nome,str);
     fflush(stdin);
 
     printf("\nidade: ");
@@ -40,11 +43,16 @@ void cadastro(aluno *vetaluno[],int pos){
     fflush(stdin);
 
     printf("\nnacionalidade: ");
-    fgets(pa->dadosPessoa.nacionalidade,20,stdin);
+    fgets(str,20,stdin);
+    limparNewLine(str);
+    strcpy(pa->dadosPessoa.nacionalidade,str);
     fflush(stdin);
 
     printf("\nra: ");
-    fgets(pa->ra,20,stdin);
+    fgets(str,20,stdin);
+    limparNewLine(str);
+    verificaRa(str);
+    strcpy(pa->ra,str);
     fflush(stdin);
 
     printf("\nnota: ");
@@ -52,7 +60,9 @@ void cadastro(aluno *vetaluno[],int pos){
     fflush(stdin);
 
     printf("\nNome curso: ");
-    fgets(pa->nomeCurso,20,stdin);
+    fgets(str,20,stdin);
+    limparNewLine(str);
+    strcpy(pa->nomeCurso,str);
     fflush(stdin);
 
     vetaluno[pos] = (aluno *)malloc (1*sizeof(aluno));
@@ -120,4 +130,48 @@ void removerAluno(aluno *vetaluno[],int ra){
     free(vetaluno[ra]);
     vetaluno[ra] = NULL;
     printf("\nRemovido com Sucesso!");
+}
+
+void limparNewLine(char *str){
+    int i;
+    for(i=0;str[i] != '\0'; i++){
+        if(str[i] == '\n'){
+            str[i] = '\0';
+        }
+    }
+}
+void verificaRa(char *ra){
+    int tam=0;
+    if( (ra[0] != 'R' || ra[0]=='r') || (ra[1] != 'A' || ra[1]=='a') ){
+         for(tam=strlen(ra)-1;tam>1;tam--){
+            ra[tam+2] = ra[tam];
+         }
+         ra[0] = 'R';
+         ra[1] = 'A';
+    }
+}
+
+void gravarArquivo(aluno *vetaluno[]){
+    int num;
+    char nomearq[] = "alunos.txt";
+    FILE *arq;
+    arq =fopen(nomearq,"w+");
+    if(arq == NULL){
+        printf("Erro ao gravar arquivos");
+        exit(-1);
+    }else{
+        for(num=0;num<=MAX_ALUNOS-1; num++){
+            if(vetaluno[num] != NULL){
+                fprintf(arq,"NovaLinha\n");
+                fprintf(arq,"%s\n",vetaluno[num]->dadosPessoa.nome);
+                fprintf(arq,"%d\n",vetaluno[num]->dadosPessoa.idade);
+                fprintf(arq,"%s\n",vetaluno[num]->dadosPessoa.nacionalidade);
+                fprintf(arq,"%s\n",vetaluno[num]->ra);
+                fprintf(arq,"%f\n",vetaluno[num]->nota);
+                fprintf(arq,"%s\n",vetaluno[num]->nomeCurso);
+            }
+        }
+    }
+    fclose(arq);
+    printf("\nArquivo gerado com sucesso!!\n\n");
 }

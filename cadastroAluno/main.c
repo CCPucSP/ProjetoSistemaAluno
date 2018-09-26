@@ -14,8 +14,8 @@ int main()
         printf("\n\t1- Cadastrar");
         printf("\n\t2- Visualizar");
         printf("\n\t3- Remover");
-        printf("\n\t3- Gravar em arquivo");
-        printf("\n\t3- Ler um arquivo");
+        printf("\n\t4- Gravar em arquivo");
+        printf("\n\t5- Ler um arquivo");
         printf("\nSua escolha: ");
         scanf("%d",&menu);
         switch(menu){
@@ -44,6 +44,12 @@ int main()
                 }else{
                     printf("\n==========RA Nao encontrado ==========\n");
                 }
+            break;
+            case 4:
+                gravarArquivo(vetalunos);
+            break;
+            case 5:
+
             break;
             default:
                 printf("\t Voce digitou um opcao invalida!");
