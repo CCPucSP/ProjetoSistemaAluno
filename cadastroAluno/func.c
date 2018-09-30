@@ -110,26 +110,40 @@ void imprimirTodos(aluno *vetAlunos[]){
 }
 
 int buscarRA(aluno *vetaluno[]){
-    int i=0;
+    int i=-1,iquais=1;
     char *ra = (char *)malloc(10*sizeof(char));
 
     printf("\nDigite o RA do aluno a ser removido:");
     fflush(stdin);
     fgets(ra,10,stdin);
+    limparNewLine(ra);
+    verificaRa(ra);
 
-    while( (strcmp(vetaluno[i]->ra,ra) != 0) && (i<=MAX_ALUNOS-1) && (i != -1) ){
+    do{
         i++;
-        if((strcmp(vetaluno[i]->ra,ra) != 0) && (i>=MAX_ALUNOS-1)){
+        iquais= strcmp(vetaluno[i]->ra,ra);
+        if((iquais != 0) && (i==MAX_ALUNOS-1)){
             i = -1;
         }
-    }
+    }while( iquais!=0 && i<=MAX_ALUNOS-1 && i!=-1);
+
     return i;
 }
 
 void removerAluno(aluno *vetaluno[],int ra){
-    free(vetaluno[ra]);
-    vetaluno[ra] = NULL;
-    printf("\nRemovido com Sucesso!");
+    int conf;
+    printf("Deseja mesmo excluir o aluno %s de %s\n",vetaluno[ra]->dadosPessoa.nome,vetaluno[ra]->ra);
+    printf("1 - Sim\n0 - nao\n");
+    fflush(stdin);
+    scanf("%d",&conf);
+    if(conf == 1){
+        free(vetaluno[ra]);
+        vetaluno[ra] = NULL;
+        printf("\nRemovido com Sucesso!");
+    }else{
+        printf("\nAluno nao removido!");
+    }
+
 }
 
 void limparNewLine(char *str){
@@ -141,14 +155,23 @@ void limparNewLine(char *str){
     }
 }
 void verificaRa(char *ra){
-    int tam=0;
-    if( (ra[0] != 'R' || ra[0]=='r') || (ra[1] != 'A' || ra[1]=='a') ){
-         for(tam=strlen(ra)-1;tam>1;tam--){
-            ra[tam+2] = ra[tam];
-         }
-         ra[0] = 'R';
-         ra[1] = 'A';
-    }
+    char *aux = (char *)malloc(20*sizeof(char));
+    int letra = 0;
+    if(ra[0]=='r' && ra[1]=='a'){
+        ra[0] = 'R';
+        ra[1] = 'A';
+    }else if( (ra[0] != 'R' || ra[0]!='r') || (ra[1] != 'A' || ra[1]!='a') ){
+        aux[0] = 'R';
+        aux[1] = 'A';
+        while(ra[letra] != '\0'){
+            aux[letra + 2] = ra[letra];
+            letra++;
+        }
+        strcpy(ra,aux);
+        ra[letra+2]='\0';
+   }
+   free(aux);
+   aux = NULL;
 }
 
 void gravarArquivo(aluno *vetaluno[]){
@@ -162,7 +185,7 @@ void gravarArquivo(aluno *vetaluno[]){
     }else{
         for(num=0;num<=MAX_ALUNOS-1; num++){
             if(vetaluno[num] != NULL){
-                fprintf(arq,"NovaLinha\n");
+                fprintf(arq,"nl\n");
                 fprintf(arq,"%s\n",vetaluno[num]->dadosPessoa.nome);
                 fprintf(arq,"%d\n",vetaluno[num]->dadosPessoa.idade);
                 fprintf(arq,"%s\n",vetaluno[num]->dadosPessoa.nacionalidade);
@@ -174,4 +197,18 @@ void gravarArquivo(aluno *vetaluno[]){
     }
     fclose(arq);
     printf("\nArquivo gerado com sucesso!!\n\n");
+}
+void lerarquivo(aluno *vetalunos[]){
+    int num, linha;
+    char nomearq[] = "alunos.txt";
+    FILE *arq;
+    arq =fopen(nomearq,"r+");
+    if(arq == NULL){
+        printf("Erro ao abrir arquivos");
+        exit(-1);
+    }else{
+        while(){
+
+        }
+    }
 }

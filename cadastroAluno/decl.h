@@ -7,3 +7,4 @@ int buscarRA(aluno *[]);
 void limparNewLine(char *);
 void gravarArquivo(aluno *[]);
 void verificaRa(char *);
+void lerarquivo(aluno *[]);

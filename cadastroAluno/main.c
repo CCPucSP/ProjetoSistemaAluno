@@ -38,6 +38,7 @@ int main()
             case 3:
                 system("cls");
                 printf("Remover de Aluno");
+                imprimirTodos(vetalunos);
                 ra = buscarRA(vetalunos);
                 if(ra != -1){
                     removerAluno(vetalunos,ra);
@@ -49,7 +50,7 @@ int main()
                 gravarArquivo(vetalunos);
             break;
             case 5:
-
+                lerarquivo(vetalunos);
             break;
             default:
                 printf("\t Voce digitou um opcao invalida!");
