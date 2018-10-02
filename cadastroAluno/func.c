@@ -118,16 +118,14 @@ int buscarRA(aluno *vetaluno[]){
     fgets(ra,10,stdin);
     limparNewLine(ra);
     verificaRa(ra);
-
-    do{
-        i++;
-        iquais= strcmp(vetaluno[i]->ra,ra);
-        if((iquais != 0) && (i==MAX_ALUNOS-1)){
-            i = -1;
-        }
-    }while( iquais!=0 && i<=MAX_ALUNOS-1 && i!=-1);
-
-    return i;
+    int pos=0;
+    while( strcmp(vetaluno[pos]->ra,ra) != 0){
+        pos++;
+    }
+    if(strcmp(vetaluno[pos]->ra,ra)){
+        pos=-1;
+    }
+    return pos;
 }
 
 void removerAluno(aluno *vetaluno[],int ra){
@@ -164,7 +162,7 @@ void verificaRa(char *ra){
         aux[0] = 'R';
         aux[1] = 'A';
         while(ra[letra] != '\0'){
-            aux[letra + 2] = ra[letra];
+            aux[letra + 2] = ra[letra+2];
             letra++;
         }
         strcpy(ra,aux);
@@ -185,7 +183,6 @@ void gravarArquivo(aluno *vetaluno[]){
     }else{
         for(num=0;num<=MAX_ALUNOS-1; num++){
             if(vetaluno[num] != NULL){
-                fprintf(arq,"nl\n");
                 fprintf(arq,"%s\n",vetaluno[num]->dadosPessoa.nome);
                 fprintf(arq,"%d\n",vetaluno[num]->dadosPessoa.idade);
                 fprintf(arq,"%s\n",vetaluno[num]->dadosPessoa.nacionalidade);
@@ -199,16 +196,33 @@ void gravarArquivo(aluno *vetaluno[]){
     printf("\nArquivo gerado com sucesso!!\n\n");
 }
 void lerarquivo(aluno *vetalunos[]){
-    int num, linha;
+    int linha=0,pos=0,end=0;
     char nomearq[] = "alunos.txt";
     FILE *arq;
+    aluno *al;
+
     arq =fopen(nomearq,"r+");
     if(arq == NULL){
         printf("Erro ao abrir arquivos");
         exit(-1);
     }else{
-        while(){
 
+        pos = posicaoLivre(vetalunos);
+        end = feof(arq);
+        while(pos != -1 && !end){
+                al = (aluno *)malloc(sizeof(aluno));
+                fscanf(arq,"%s",&al->dadosPessoa.nome);
+                fscanf(arq,"%s",&al->dadosPessoa.idade);
+                fscanf(arq,"%s",&al->dadosPessoa.nacionalidade);
+                fscanf(arq,"%s",&al->ra);
+                fscanf(arq,"%s",&al->nota);
+                fscanf(arq,"%s",&al->nomeCurso);
+                vetalunos[linha] = al;
+                linha++;
+                pos = posicaoLivre(vetalunos);
+                end = feof(arq);
         }
     }
+    fclose(arq);
 }
+

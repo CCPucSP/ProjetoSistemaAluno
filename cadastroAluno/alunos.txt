@@ -1,7 +1,6 @@
-NovaLinha
-asd
-1702130553
-asd
-RA02525
-0.000000
-asd
+vinicius
+30
+br
+RA2526
+10.000000
+cc
