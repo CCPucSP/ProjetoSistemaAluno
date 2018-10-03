@@ -5,6 +5,15 @@
 #include "tipos.h"
 #include "decl.h"
 
+/*
+** Inicializa o vetor com null
+**
+** Parâmetros:
+**      vetAlunos - vetor para alunos
+**
+** Retorno:
+**      nenhum
+*/
 void inicializarVet(aluno *vetAlunos[]){
     int i;
     for (i=0; i < MAX_ALUNOS; i++) {
@@ -13,7 +22,15 @@ void inicializarVet(aluno *vetAlunos[]){
 }
 
 
-
+/*
+** Devolve uma uma posicao livre no vetor
+**
+** Parâmetros:
+**      vetAlunos - vetor para alunos
+**
+** Retorno:
+**      i - posicao varia de 0 até (MAX_ALUNOS - 1)
+*/
 int posicaoLivre(aluno *vetaluno[]){
     int i=0;
     while((vetaluno[i] != NULL) && (i<=MAX_ALUNOS-1) && (i != -1)){
@@ -26,6 +43,15 @@ int posicaoLivre(aluno *vetaluno[]){
     return i;
 }
 
+/*
+** Funcao de entrada de dados para as informacoes de um aluno
+**
+** Parâmetros:
+**      vetAlunos - vetor para alunos
+**      pos - posicao livre no vetor
+** Retorno:
+**      nenhum
+*/
 void cadastro(aluno *vetaluno[],int pos){
 
     aluno *pa = (aluno *)malloc (1*sizeof(aluno));
@@ -72,7 +98,7 @@ void cadastro(aluno *vetaluno[],int pos){
 /*
 ** Imprime dados de um aluno
 **
-** Par�metros:
+** Parâmetros:
 **      aluno a - variavel do tipo aluno
 **
 ** Retorno:
@@ -94,7 +120,7 @@ void imprimirDados (aluno a) {
 /*
 ** Imprime dados de todos os alunos do cadastro
 **
-** Par�metros:
+** Parâmetros:
 **      aluno *vetAlunos[] - vetor de ponteiros para aluno
 **
 ** Retorno:
@@ -109,6 +135,15 @@ void imprimirTodos(aluno *vetAlunos[]){
     }
 }
 
+/*
+** Funcao que compara um RA solicitado na funcao com 
+**  com todos os compos de RA do vetor vetalunos e retorna uma posicoa desse vetor
+** Parâmetros:
+**      vetAlunos - vetor para alunos
+**
+** Retorno:
+**      pos - posicao onde foi encontrado o RA
+*/
 int buscarRA(aluno *vetaluno[]){
     int i=-1,iquais=1;
     char *ra = (char *)malloc(10*sizeof(char));
@@ -128,6 +163,15 @@ int buscarRA(aluno *vetaluno[]){
     return pos;
 }
 
+/*
+** Remove uma aluno do vetor vetaluno com base no indice passado
+**
+** Parâmetros:
+**      vetAlunos - vetor para alunos
+**      ra - inteiro correspondete a posicao do vetor
+** Retorno:
+**      nenhum
+*/
 void removerAluno(aluno *vetaluno[],int ra){
     int conf;
     printf("Deseja mesmo excluir o aluno %s de %s\n",vetaluno[ra]->dadosPessoa.nome,vetaluno[ra]->ra);
@@ -144,6 +188,15 @@ void removerAluno(aluno *vetaluno[],int ra){
 
 }
 
+/*
+** Retira o caracter especial '\n' da string
+**
+** Parâmetros:
+**      str - vetor de caracteres
+**
+** Retorno:
+**      str - vetor de caracteres sem o '\n'
+*/
 void limparNewLine(char *str){
     int i;
     for(i=0;str[i] != '\0'; i++){
@@ -152,6 +205,16 @@ void limparNewLine(char *str){
         }
     }
 }
+
+/*
+** Adiciona os caracteres "RA" a string 
+**
+** Parâmetros:
+**      ra - vetor para caracteres
+**
+** Retorno:
+**      ra - string modificada
+*/
 void verificaRa(char *ra){
     char *aux = (char *)malloc(20*sizeof(char));
     int letra = 0;
@@ -172,6 +235,15 @@ void verificaRa(char *ra){
    aux = NULL;
 }
 
+/*
+** Gravas os dados do vetor vetalunos em um arquivo de texto
+**
+** Parâmetros:
+**      vetAlunos - vetor para alunos
+**
+** Retorno:
+**      gera um arquivo de texto
+*/
 void gravarArquivo(aluno *vetaluno[]){
     int num;
     char nomearq[] = "alunos.txt";
@@ -195,6 +267,16 @@ void gravarArquivo(aluno *vetaluno[]){
     fclose(arq);
     printf("\nArquivo gerado com sucesso!!\n\n");
 }
+
+/*
+** Insere dados no vetor de alunos com base em um arquivo de texto
+**
+** Parâmetros:
+**      vetAlunos - vetor para alunos
+**
+** Retorno:
+**      vetaluno - vetor preechido
+*/
 void lerarquivo(aluno *vetalunos[]){
     int linha=0,pos=0,end=0;
     char nomearq[] = "alunos.txt";
