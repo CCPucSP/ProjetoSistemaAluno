@@ -39,21 +39,21 @@
 	"tipos.h"
 	"decl.h"
 
-1538340403 source:c:\users\cpudv\desktop\cadastroaluno\func.c
+1538503488 source:c:\users\cpudv\desktop\cadastroaluno\func.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"tipos.h"
 	"decl.h"
 
-1538279937 c:\users\cpudv\desktop\cadastroaluno\tipos.h
+1538501967 c:\users\cpudv\desktop\cadastroaluno\tipos.h
 	"const.h"
 
-1538279937 c:\users\cpudv\desktop\cadastroaluno\const.h
+1538501966 c:\users\cpudv\desktop\cadastroaluno\const.h
 
-1538279937 c:\users\cpudv\desktop\cadastroaluno\decl.h
+1538501967 c:\users\cpudv\desktop\cadastroaluno\decl.h
 
-1538315443 source:c:\users\cpudv\desktop\cadastroaluno\main.c
+1538501967 source:c:\users\cpudv\desktop\cadastroaluno\main.c
 	<stdio.h>
 	<stdlib.h>
 	"tipos.h"
